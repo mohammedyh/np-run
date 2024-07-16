@@ -84,8 +84,15 @@ func installDependencies(packageManager string) {
 
 	if err != nil {
 		command := exec.Command(packageManager, "install")
-		installOutput, _ := command.Output()
-		fmt.Println(string(installOutput))
+
+		command.Stdout = os.Stdout
+		command.Stderr = os.Stderr
+
+		fmt.Printf("Installing %v packages\n", packageManager)
+		err := command.Run()
+		if err != nil {
+			fmt.Printf("Error running command: %v\n", err)
+		}
 	}
 }
 
@@ -104,7 +111,6 @@ type model struct {
 }
 
 func (m model) Init() tea.Cmd {
-	installDependencies(packageManager)
 	return tea.SetWindowTitle("np-run")
 }
 
@@ -144,6 +150,7 @@ func main() {
 	}
 
 	detectPackageManager()
+	installDependencies(packageManager)
 
 	var parsedJson map[string]interface{}
 
