@@ -15,5 +15,5 @@ https://github.com/mohammedyh/np-run/assets/32526267/4b866d0e-9e0a-4251-b874-ad1
 
 ### Nice-To-Have Features
 - [x] Install dependencies if `node_modules` isn't found
-  - [ ] Show spinner or progress bar while dependencies are installing
+  - [x] Show spinner or progress bar while dependencies are installing
 - [x] Print something if multiple lockfiles are found
